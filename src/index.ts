@@ -1,4 +1,4 @@
-import { ConnectionServiceEvents, ConnectionState, ConnectedUser } from 'rainbow-web-sdk';
+import { ConnectionServiceEvents, ConnectionState, ConnectedUser, User } from 'rainbow-web-sdk';
 import { RBEvent, RainbowSDK, LogLevelEnum } from 'rainbow-web-sdk';
 import config from '../config.json';
 
@@ -48,6 +48,12 @@ class TestRainbowSDK {
         console.info(`[testAppli] onConnectionStateChange ${connectionState.state}`);
     }
 }
-
 const testRainbowSDK = new TestRainbowSDK();
-testRainbowSDK.init();
+testRainbowSDK.init().then(() => {
+    const sdk: RainbowSDK = RainbowSDK.getInstance();
+    const connectedUser: ConnectedUser = sdk.connectedUser;
+    console.log(connectedUser);
+    const networkUsers: User[] = sdk.userNetwork.getUsers();
+    console.log(networkUsers);
+});
+

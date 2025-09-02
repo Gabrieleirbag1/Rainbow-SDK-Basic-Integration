@@ -1,6 +1,17 @@
-<p>Welcome to the Rainbow SDK Integration!</p>
-@if (isConnected) {
-  <p>You are connected to Rainbow!</p>
-} @else {
-  <button (click)="connect()">Connect to Rainbow</button>
-}
+<div>
+  <p>Welcome to the Rainbow SDK Integration!</p>
+  @if (isConnected) {
+  <p><b>You are connected to Rainbow!</b></p>
+  } @else {
+  <button class="btn btn-primary" (click)="connect()">Connect to Rainbow</button>
+  }
+</div>
+
+<div *ngIf="isConnected">
+  <h2>Your Contacts:</h2>
+  <ul>
+    <li *ngFor="let contact of contacts">
+        <button class="list-btn">{{ contact.displayName }}</button>
+    </li>
+  </ul>
+</div>

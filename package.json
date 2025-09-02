@@ -15,5 +15,8 @@
   "devDependencies": {
     "esbuild": "^0.25.9",
     "serve": "^14.2.4"
+  },
+  "dependencies": {
+    "rainbow-web-sdk": "^5.0.39-sts"
   }
 }

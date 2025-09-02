@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../../services/connection.service';
 
 @Component({
@@ -7,10 +7,20 @@ import { ConnectionService } from '../../services/connection.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  protected isConnected: boolean = false;
+
   constructor(private connectionService: ConnectionService) {}
 
+  ngOnInit(): void {
+    this.isConnected = this.connectionService.isUserConnected();
+  }
+
   connect() {
-    this.connectionService.init();
+    this.connectionService.init().then(() => {
+      this.isConnected = this.connectionService.isUserConnected();
+    }).catch((error) => {
+      console.error(`[testAppli] ${error.message}`);
+    });
   }
 }

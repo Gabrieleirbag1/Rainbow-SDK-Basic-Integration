@@ -55,6 +55,12 @@ export class ConnectionService {
       `[testAppli] onConnectionStateChange ${connectionState.state}`
     );
   }
+
+  public isUserConnected(): boolean {
+    const sdk: RainbowSDK = RainbowSDK.getInstance();
+    const connectedUser: ConnectedUser | undefined = sdk.connectedUser;
+    return connectedUser !== undefined;
+  }
 }
 
 // const testRainbowSDK = new TestRainbowSDK();

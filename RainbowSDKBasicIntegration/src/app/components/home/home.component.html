@@ -1,2 +1,6 @@
 <p>Welcome to the Rainbow SDK Integration!</p>
-<button (click)="connect()">Connect to Rainbow</button>
+@if (isConnected) {
+  <p>You are connected to Rainbow!</p>
+} @else {
+  <button (click)="connect()">Connect to Rainbow</button>
+}

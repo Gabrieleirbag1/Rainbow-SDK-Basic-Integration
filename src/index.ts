@@ -1,9 +1,6 @@
 import { ConnectionServiceEvents, ConnectionState, ConnectedUser } from 'rainbow-web-sdk';
 import { RBEvent, RainbowSDK, LogLevelEnum } from 'rainbow-web-sdk';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
+import config from '../config.json' assert { type: 'json' };
 
 class TestRainbowSDK {
     protected rainbowSDK: RainbowSDK;
@@ -12,9 +9,9 @@ class TestRainbowSDK {
         
         this.rainbowSDK = RainbowSDK.create({
             appConfig: { 
-                server: process.env.RAINBOW_SERVER || 'demo.openrainbow.org', 
-                applicationId: process.env.RAINBOW_APP_ID || '',
-                secretKey: process.env.RAINBOW_SECRET_KEY || ''
+                server: config.RAINBOW_SERVER || 'demo.openrainbow.org', 
+                applicationId: config.RAINBOW_APP_ID || '',
+                secretKey: config.RAINBOW_SECRET_KEY || ''
             },
             plugins: [],
             autoLogin: true,
@@ -27,8 +24,8 @@ class TestRainbowSDK {
         );
 
         let userConnected: ConnectedUser = await this.rainbowSDK.start();
-        const user = process.env.RAINBOW_USER || '';
-        const pwd = process.env.RAINBOW_PASSWORD || '';
+        const user = config.RAINBOW_USER || '';
+        const pwd = config.RAINBOW_PASSWORD || '';
         
         if (!userConnected) {
             try { 

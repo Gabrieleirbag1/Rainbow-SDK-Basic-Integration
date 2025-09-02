@@ -1,6 +1,6 @@
 import { ConnectionServiceEvents, ConnectionState, ConnectedUser } from 'rainbow-web-sdk';
 import { RBEvent, RainbowSDK, LogLevelEnum } from 'rainbow-web-sdk';
-import config from '../config.json' assert { type: 'json' };
+import config from '../config.json';
 
 class TestRainbowSDK {
     protected rainbowSDK: RainbowSDK;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, viewChild } from '@angular/core';
 import { ConnectionService } from '../../services/connection.service';
 import { Message, User } from 'rainbow-web-sdk';
 import { NetworkService } from '../../services/network.service';
@@ -13,6 +13,8 @@ import { FormsModule} from '@angular/forms';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
+  @ViewChild('messagesContainer') messagesContainer: any;
+
   protected connectedUser: User = {} as User;
   protected isConnected: boolean = false;
   protected contacts?: User[];
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     const connectionInfo = this.connectionService.isUserConnected();
     this.isConnected = connectionInfo.connected;
+
   }
 
   protected connect() {
@@ -36,6 +39,17 @@ export class HomeComponent implements OnInit{
     }).catch((error) => {
       console.error(`[testAppli] ${error.message}`);
     });
+  }
+
+  scrollToBottom(): void {
+    try {
+      if (this.messagesContainer) {
+        this.messagesContainer.nativeElement.scrollTop = 
+          this.messagesContainer.nativeElement.scrollHeight;
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   private getContacts(): void {
@@ -50,6 +64,7 @@ export class HomeComponent implements OnInit{
         this.messages = messages;
       });
     }
+    setTimeout(() => this.scrollToBottom(), 100);
   }
 
   protected sendMessage(): void {

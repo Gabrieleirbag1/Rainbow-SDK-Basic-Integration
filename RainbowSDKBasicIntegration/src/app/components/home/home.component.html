@@ -11,7 +11,18 @@
   <h2>Your Contacts:</h2>
   <ul>
     <li *ngFor="let contact of contacts">
-        <button class="list-btn">{{ contact.displayName }}</button>
+        <button class="list-btn" (click)="getMessages(contact)">{{ contact.displayName }}</button>
     </li>
   </ul>
+</div>
+
+<div *ngIf="messages && messages.length > 0">
+  <h2>Messages:</h2>
+  <ul>
+    <li *ngFor="let message of messages">
+        <p><b>{{ message.from.displayName }}:</b> {{ message.data }}</p>
+    </li>
+  </ul>
+  <input type="text" [(ngModel)]="newMessage" placeholder="Type your message here..." />
+  <button (click)="sendMessage()">Send</button>
 </div>

@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../../services/connection.service';
-import { User } from 'rainbow-web-sdk';
+import { Message, User } from 'rainbow-web-sdk';
 import { NetworkService } from '../../services/network.service';
 import { CommonModule } from '@angular/common';
 import { ConvService } from '../../services/conv.service';
+import { FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   protected isConnected: boolean = false;
   protected contacts?: User[];
+  protected messages: Message[] = [];
+  protected newMessage: string = '';
+  protected selectedUser: User = {} as User;
 
   constructor(private connectionService: ConnectionService, private networkService: NetworkService, private convService: ConvService) {}
 
@@ -21,11 +25,10 @@ export class HomeComponent implements OnInit{
     this.isConnected = this.connectionService.isUserConnected();
   }
 
-  connect() {
+  protected connect() {
     this.connectionService.init().then(() => {
       this.isConnected = this.connectionService.isUserConnected();
       this.getContacts();
-      this.getConversations();
     }).catch((error) => {
       console.error(`[testAppli] ${error.message}`);
     });
@@ -35,12 +38,17 @@ export class HomeComponent implements OnInit{
     this.contacts = this.networkService.getContacts();
   }
 
-  private getConversations(): void {
+  protected getMessages(contact: User): void {
     console.log("Contacts", this.contacts);
+    this.selectedUser = contact;
     if (this.contacts && this.contacts.length > 0) {
-      this.convService.getMessages(this.contacts[0]).then(() => {
-        // Handle the retrieved messages
+      this.convService.getMessages(contact).then((messages) => {
+        this.messages = messages;
       });
     }
+  }
+
+  protected sendMessage(): void {
+    this.convService.sendMessage(this.selectedUser, this.newMessage);
   }
 }

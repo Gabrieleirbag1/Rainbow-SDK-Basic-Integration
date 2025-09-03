@@ -1,28 +1,30 @@
-<div>
+<section>
   <p>Welcome to the Rainbow SDK Integration!</p>
   @if (isConnected) {
   <p><b>You are connected to Rainbow!</b></p>
   } @else {
   <button class="btn btn-primary" (click)="connect()">Connect to Rainbow</button>
   }
-</div>
+</section>
 
-<div *ngIf="isConnected">
+<section *ngIf="isConnected">
   <h2>Your Contacts:</h2>
   <ul>
     <li *ngFor="let contact of contacts">
         <button class="list-btn" (click)="getMessages(contact)">{{ contact.displayName }}</button>
     </li>
   </ul>
-</div>
+</section>
 
-<div *ngIf="messages && messages.length > 0">
+<section *ngIf="messages && messages.length > 0">
   <h2>Messages:</h2>
   <ul>
     <li *ngFor="let message of messages">
         <p><b>{{ message.from.displayName }}:</b> {{ message.data }}</p>
     </li>
   </ul>
-  <input type="text" [(ngModel)]="newMessage" placeholder="Type your message here..." />
-  <button (click)="sendMessage()">Send</button>
-</div>
+  <div class="message-input-container">
+    <input type="text" class="message-input" [(ngModel)]="newMessage" placeholder="Type your message here..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</section>

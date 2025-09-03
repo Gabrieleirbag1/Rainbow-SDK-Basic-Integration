@@ -6,8 +6,10 @@ import { CallService, MediaType, RainbowSDK, User } from 'rainbow-web-sdk';
 })
 export class CallingService {
   private medias: MediaType[] = [MediaType.AUDIO, MediaType.VIDEO];
+  rainbowSDK: RainbowSDK;
 
   constructor() { 
+    this.rainbowSDK = RainbowSDK.getInstance();
   }
 
   async getCallService(): Promise<CallService> {

@@ -12,6 +12,8 @@
   <ul>
     <li *ngFor="let contact of contacts">
         <button class="list-btn" (click)="getMessages(contact)">{{ contact.displayName }}</button>
+        <button (click)="callingService.makeAudioCall(contact)">Call</button>
+        <button (click)="callingService.makeVideoCall(contact)">Video Call</button>
     </li>
   </ul>
 </section>

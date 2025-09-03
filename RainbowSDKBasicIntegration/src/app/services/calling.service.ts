@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CallService, RainbowSDK } from 'rainbow-web-sdk';
+import { CallService, MediaType, RainbowSDK, User } from 'rainbow-web-sdk';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CallingService {
   private rainbowSDK: RainbowSDK;
+  private medias: MediaType[] = [MediaType.AUDIO, MediaType.VIDEO];
   callService: CallService = {} as CallService;
 
   constructor() { 
@@ -15,5 +16,13 @@ export class CallingService {
 
   getCallService(): CallService {
     return this.callService;
+  }
+
+  makeAudioCall(user: User): void {
+    this.callService.makeWebCall(user)
+  }
+
+  makeVideoCall(user: User): void {
+    this.callService.makeWebCall(user, this.medias, "Making some tests")
   }
 }

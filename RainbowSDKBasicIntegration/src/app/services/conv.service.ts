@@ -32,7 +32,7 @@ export class ConvService {
 
     if (conversation) {
       // Retrieve the first 30 messages exchanged with "A" in the history (i.e. the thirty most recent).
-      await conversation.getHistoryPage(30);
+      await conversation.getHistoryPage(200);
       const messages: Message[] = conversation.getMessages();
 
       console.log('Messages', messages);

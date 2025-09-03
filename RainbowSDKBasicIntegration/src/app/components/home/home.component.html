@@ -21,7 +21,11 @@
   <div class="messages-section">
     <ul>
       <li *ngFor="let message of messages">
-          <p><b>{{ message.from.displayName }}:</b> {{ message.data }}</p>
+          @if (message.data) {
+            <p><b>{{ message.from.displayName }}:</b> {{ message.data }}</p>
+          } @else {
+            <p><b>{{ message.from.displayName }}:</b> Deleted message</p>
+          }
       </li>
     </ul>
   </div>

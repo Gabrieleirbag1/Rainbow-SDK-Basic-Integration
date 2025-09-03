@@ -40,18 +40,21 @@
   </div>
 </section>
 
-<section class="call-modal" *ngIf="conversation">
-  <h2>Current Call:</h2>
-  <div *ngIf="conversation">
-    <img [src]="conversation.call.avatars[0]" alt="Caller Avatar" class="caller-avatar" />
-    <p><b>{{ conversation.filterName }}</b></p>
+<!-- Modal Overlay -->
+<div class="modal-overlay" *ngIf="conversation">
+  <div class="modal-content">
+    <h2>Current Call:</h2>
+    <div>
+      <img [src]="conversation.call.avatars[0]" alt="Caller Avatar" class="caller-avatar" />
+      <p><b>{{ conversation.filterName }}</b></p>
 
-    @if (conversation.call.status.value === 'incommingCall') {
-      <p>Incoming call...</p>
-      <button (click)="callingService.answerCall(conversation.call, true)">Answer</button>
-    } @else if (conversation.call.status.value === 'dialing') {
-      <p>Dialing call...</p>
-    }
-    <button (click)="callingService.releaseCall(conversation.call)">Hang up</button>
+      @if (conversation.call.status.value === 'incommingCall') {
+        <p>Incoming call...</p>
+        <button (click)="callingService.answerCall(conversation.call, true)">Answer</button>
+      } @else if (conversation.call.status.value === 'dialing') {
+        <p>Dialing call...</p>
+      }
+      <button (click)="callingService.releaseCall(conversation.call)">Hang up</button>
+    </div>
   </div>
-</section>
+</div>

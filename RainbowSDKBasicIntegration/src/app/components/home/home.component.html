@@ -43,8 +43,8 @@
 <section class="call-modal" *ngIf="conversation">
   <h2>Current Call:</h2>
   <div *ngIf="conversation">
-    <p><b>Caller:</b> {{ conversation.filterName }}</p>
-    <p><b>Status:</b> {{ conversation.status }}</p>
+    <img [src]="conversation.call.avatars[0]" alt="Caller Avatar" class="caller-avatar" />
+    <p><b>{{ conversation.filterName }}</b></p>
 
     @if (conversation.call.status.value === 'incommingCall') {
       <p>Incoming call...</p>

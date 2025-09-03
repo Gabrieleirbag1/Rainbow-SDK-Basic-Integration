@@ -49,6 +49,9 @@ export class HomeComponent implements OnInit{
   }
 
   protected sendMessage(): void {
-    this.convService.sendMessage(this.selectedUser, this.newMessage);
+    if (this.newMessage.trim()) {
+      this.convService.sendMessage(this.selectedUser, this.newMessage);
+      this.newMessage = '';
+    }
   }
 }

@@ -24,7 +24,7 @@
     </li>
   </ul>
   <div class="message-input-container">
-    <input type="text" class="message-input" [(ngModel)]="newMessage" placeholder="Type your message here..." />
+    <input type="text" class="message-input" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Type your message here..." />
     <button (click)="sendMessage()">Send</button>
   </div>
 </section>

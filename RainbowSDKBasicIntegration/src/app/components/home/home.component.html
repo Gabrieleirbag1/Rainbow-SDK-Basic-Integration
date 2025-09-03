@@ -39,3 +39,13 @@
     <button (click)="sendMessage()">Send</button>
   </div>
 </section>
+
+<section class="call-modal" *ngIf="conversation">
+  <h2>Current Call:</h2>
+  <div *ngIf="conversation">
+    <p><b>Caller:</b> {{ conversation.filterName }}</p>
+    <p><b>Status:</b> {{ conversation.status }}</p>
+    <button (click)="callingService.answerCall(conversation.call, true)">Answer</button>
+    <button (click)="callingService.answerCall(conversation.call, false)">Reject</button>
+  </div>
+</section>

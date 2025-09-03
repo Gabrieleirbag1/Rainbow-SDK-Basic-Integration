@@ -11,8 +11,7 @@ export class CallingService {
   }
 
   async getCallService(): Promise<CallService> {
-    const rainbowSDK = RainbowSDK.getInstance();
-    const callService = rainbowSDK.callService ? rainbowSDK.callService : {} as CallService;
+    const callService = this.rainbowSDK.callService ? this.rainbowSDK.callService : {} as CallService;
     return callService;
   }
 

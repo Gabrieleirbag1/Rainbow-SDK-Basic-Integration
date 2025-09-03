@@ -20,8 +20,8 @@
   <h2>Messages:</h2>
   <div class="messages-section" #messagesContainer>
     <ul>
-      <li *ngFor="let message of messages">
-        <p [ngStyle]="{'text-align': message.from.displayName === connectedUser.displayName ? 'right' : 'left'}">
+      <li *ngFor="let message of messages" [ngStyle]="{'justify-content': message.from.displayName === connectedUser.displayName ? 'flex-end' : 'flex-start'}">
+        <p>
           <b>{{ message.from.displayName }}:</b>
             @if (message.data) {
               <span>{{ message.data }}</span>}

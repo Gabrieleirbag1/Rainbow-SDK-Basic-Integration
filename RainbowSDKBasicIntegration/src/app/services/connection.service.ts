@@ -56,10 +56,10 @@ export class ConnectionService {
     );
   }
 
-  public isUserConnected(): boolean {
+  public isUserConnected(): { connected: boolean; user?: User } {
     const sdk: RainbowSDK = RainbowSDK.getInstance();
     const connectedUser: ConnectedUser | undefined = sdk.connectedUser;
-    return connectedUser !== undefined;
+    return { connected: connectedUser !== undefined, user: connectedUser };
   }
 }
 

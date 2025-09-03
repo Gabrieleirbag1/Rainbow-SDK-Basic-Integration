@@ -13,6 +13,7 @@ import { FormsModule} from '@angular/forms';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
+  protected connectedUser: User = {} as User;
   protected isConnected: boolean = false;
   protected contacts?: User[];
   protected messages: Message[] = [];
@@ -22,12 +23,15 @@ export class HomeComponent implements OnInit{
   constructor(private connectionService: ConnectionService, private networkService: NetworkService, private convService: ConvService) {}
 
   ngOnInit(): void {
-    this.isConnected = this.connectionService.isUserConnected();
+    const connectionInfo = this.connectionService.isUserConnected();
+    this.isConnected = connectionInfo.connected;
   }
 
   protected connect() {
     this.connectionService.init().then(() => {
-      this.isConnected = this.connectionService.isUserConnected();
+      const connectionInfo = this.connectionService.isUserConnected();
+      this.isConnected = connectionInfo.connected;
+      this.connectedUser = connectionInfo.user ? connectionInfo.user : {} as User;
       this.getContacts();
     }).catch((error) => {
       console.error(`[testAppli] ${error.message}`);

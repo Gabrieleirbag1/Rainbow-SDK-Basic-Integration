@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CallService, MediaType, RainbowSDK, User } from 'rainbow-web-sdk';
+import { Call, CallService, MediaType, RainbowSDK, User } from 'rainbow-web-sdk';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +28,13 @@ export class CallingService {
       callService.makeWebCall(user, this.medias, "Making some tests");
     });
   }
+
+  async answerCall(call: Call, doesAnswer: boolean): Promise<void> {
+    await call.answer(doesAnswer);
+  }
+
+  async releaseCall(call: Call): Promise<void> {
+    await call.release();
+  }
+  
 }

@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   protected selectedUser: User = {} as User;
 
   private rainbowSDK: RainbowSDK;
+  private currentCall: Call | null = null;
 
   constructor(
     private connectionService: ConnectionService,
@@ -82,6 +83,7 @@ export class HomeComponent implements OnInit {
 
   protected onCallConversationCreated(conversation: Conversation): void {
     console.log('Call conversation created:', conversation);
+    this.currentCall = conversation.call;
     this.subscribeCallEvent();
     return;
   }

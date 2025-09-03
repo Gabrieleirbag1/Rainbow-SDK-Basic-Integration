@@ -1,14 +1,20 @@
 import { Inject, Injectable } from '@angular/core';
-import { Message, RainbowSDK, User } from 'rainbow-web-sdk';
+import {
+  Conversation,
+  ConversationServiceEvents,
+  Message,
+  RainbowSDK,
+  RBEvent,
+  User,
+} from 'rainbow-web-sdk';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConvService {
-
   private rainbowSDK: RainbowSDK;
 
-  constructor() { 
+  constructor() {
     this.rainbowSDK = RainbowSDK.getInstance();
   }
 
@@ -21,8 +27,7 @@ export class ConvService {
     return conversationService.getConversation(user);
   }
 
-  async getMessages(user: User): Promise<Message[]> {  
-
+  async getMessages(user: User): Promise<Message[]> {
     const conversation = await this.getConversation(user);
 
     if (conversation) {
@@ -30,7 +35,7 @@ export class ConvService {
       await conversation.getHistoryPage(30);
       const messages: Message[] = conversation.getMessages();
 
-      console.log("Messages", messages);
+      console.log('Messages', messages);
       return messages;
     }
     return [];

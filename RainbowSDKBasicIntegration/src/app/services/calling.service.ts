@@ -35,6 +35,7 @@ export class CallingService {
 
   async releaseCall(call: Call): Promise<void> {
     await call.release();
+    await call.addVideo();
   }
-  
+
 }

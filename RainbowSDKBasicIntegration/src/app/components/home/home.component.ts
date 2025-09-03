@@ -9,6 +9,7 @@ import {
   RainbowSDK,
   RBEvent,
   User,
+  CallStatus,
 } from 'rainbow-web-sdk';
 import { NetworkService } from '../../services/network.service';
 import { CommonModule } from '@angular/common';
@@ -83,6 +84,7 @@ export class HomeComponent implements OnInit {
 
   protected onCallConversationCreated(conversation: Conversation): void {
     console.log('Call conversation created:', conversation);
+    console.log(conversation.call)
     this.conversation = conversation;
     this.subscribeCallEvent();
     return;

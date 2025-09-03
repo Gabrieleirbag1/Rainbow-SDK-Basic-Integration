@@ -23,7 +23,7 @@
   <div class="messages-section" #messagesContainer>
     <ul>
       <li *ngFor="let message of messages" [ngStyle]="{'justify-content': message.from.displayName === connectedUser.displayName ? 'flex-end' : 'flex-start'}">
-        <p>
+        <p class="msg-p">
           <b>{{ message.from.displayName }}:</b>
             @if (message.data) {
               <span>{{ message.data }}</span>}
@@ -45,7 +45,13 @@
   <div *ngIf="conversation">
     <p><b>Caller:</b> {{ conversation.filterName }}</p>
     <p><b>Status:</b> {{ conversation.status }}</p>
-    <button (click)="callingService.answerCall(conversation.call, true)">Answer</button>
-    <button (click)="callingService.answerCall(conversation.call, false)">Reject</button>
+
+    @if (conversation.call.status.value === 'incommingCall') {
+      <p>Incoming call...</p>
+      <button (click)="callingService.answerCall(conversation.call, true)">Answer</button>
+    } @else if (conversation.call.status.value === 'dialing') {
+      <p>Dialing call...</p>
+    }
+    <button (click)="callingService.releaseCall(conversation.call)">Hang up</button>
   </div>
 </section>

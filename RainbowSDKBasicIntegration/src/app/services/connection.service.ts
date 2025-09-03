@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConnectionServiceEvents, ConnectionState, ConnectedUser, User } from 'rainbow-web-sdk';
+import { ConnectionServiceEvents, ConnectionState, ConnectedUser, User, CallsPlugin } from 'rainbow-web-sdk';
 import { RBEvent, RainbowSDK, LogLevelEnum } from 'rainbow-web-sdk';
 import config from '../../config.json';
 
@@ -18,7 +18,7 @@ export class ConnectionService {
         applicationId: config.RAINBOW_APP_ID || '',
         secretKey: config.RAINBOW_SECRET_KEY || '',
       },
-      plugins: [],
+      plugins: [CallsPlugin],
       autoLogin: true,
       logLevel: LogLevelEnum.WARNING,
     });

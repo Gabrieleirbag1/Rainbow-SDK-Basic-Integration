@@ -23,7 +23,7 @@
   <div class="messages-section" #messagesContainer>
     <ul>
       <li *ngFor="let message of messages" [ngStyle]="{'justify-content': message.from.displayName === connectedUser.displayName ? 'flex-end' : 'flex-start'}">
-        <p class="msg-p">
+        <p class="msg-p" *ngIf="message.type === 'Chat'">
           <b>{{ message.from.displayName }}:</b>
             @if (message.data) {
               <span>{{ message.data }}</span>}

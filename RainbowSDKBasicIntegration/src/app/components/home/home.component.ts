@@ -177,9 +177,9 @@ export class HomeComponent implements OnInit {
     if (this.contacts && this.contacts.length > 0) {
       this.convService.getMessages(contact).then((messages) => {
         this.messages = messages;
+        setTimeout(() => this.scrollToBottom(), 100);
       });
     }
-    setTimeout(() => this.scrollToBottom(), 100);
   }
 
   protected sendMessage(): void {

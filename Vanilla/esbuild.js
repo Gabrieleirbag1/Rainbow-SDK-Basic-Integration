@@ -26,6 +26,8 @@ await esbuild.build({
     entryPoints: ['src/index.ts'],
     bundle: true,
     format: 'esm',
+    sourcemap: true,
+    sourcesContent: true,
     outdir: 'dist',
     plugins: [copyStaticPlugin]
 });

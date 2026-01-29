@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "dotenv": "^17.2.1",
-    "rainbow-web-sdk": "^5.0.39-sts"
+    "rainbow-web-sdk": "file:../../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.42-sts.tgz"
   }
 }

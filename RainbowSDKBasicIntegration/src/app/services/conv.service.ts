@@ -28,7 +28,7 @@ export class ConvService {
   }
 
   async getMessages(user: User): Promise<Message[]> {
-    const conversation = await this.getConversation(user);
+    const conversation = await this.getConversation(user) as Conversation;
 
     if (conversation) {
       // Retrieve the first 30 messages exchanged with "A" in the history (i.e. the thirty most recent).
